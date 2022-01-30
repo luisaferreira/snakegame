@@ -1,6 +1,6 @@
 window.onload = function () {
 
-    var stage = document.getElementById('stage');
+    var stage = document.getElementById('tabuleiro');
     var ctx = stage.getContext("2d");
     document.addEventListener("keydown", keyPush);
     setInterval(game, 80);
@@ -45,6 +45,7 @@ window.onload = function () {
             if (rastro[i].x == posicaoCobraX && rastro[i].y == posicaoCobraY) {
                 velocidadeCobraX = velocidadeCobraY = 0;
                 cauda = 5;
+                pontuacao(0);
             }
         }
 
@@ -55,10 +56,23 @@ window.onload = function () {
 
         if (posicaoMacaX == posicaoCobraX && posicaoMacaY == posicaoCobraY) {
             cauda++;
+            pontuacao();
             posicaoMacaX = Math.floor(Math.random() * quantidadePecas);
             posicaoMacaY = Math.floor(Math.random() * quantidadePecas);
         }
 
+    }
+
+    function pontuacao(zerar) {
+        var pontuacao = document.getElementById("pontuacao")
+
+        if (zerar == 0)
+            pontuacao.innerText = 0
+        else {
+            var pontos = parseInt(pontuacao.innerText) + 5
+
+            pontuacao.innerText = pontos
+        }
     }
 
     function keyPush(event) {
